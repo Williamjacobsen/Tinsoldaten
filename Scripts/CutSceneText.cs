@@ -56,6 +56,7 @@ public class CutSceneText : MonoBehaviour
                 {"Da det nu blev morgen, og børnene kom op, blev tinsoldaten stillet hen i vinduet, og enten det nu var trolden eller trækvind", 5.5f},
                 {"lige med ét fløj vinduet op og soldaten gik ud på hovedet fra tredje sal", 5},
                 {"Change Scene", 0},
+                {"", 0},
                 {"Nu begyndte det at regne, den ene dråbe faldt tættere end den anden, det blev en ordentlig skylle; da den var forbi, kom der to gadedrenge", 7.5f},
                 {"'Se du!' sagde den ene, 'der ligger en tinsoldat! Han skal ud at sejle!'", 4.5f},
                 {"Og så gjorde de en båd af en avis, satte tinsoldaten midt i den, og nu sejlede han ned af rendestenen mod det ukendte", 8f},
@@ -112,15 +113,16 @@ public class CutSceneText : MonoBehaviour
             if (TextAndTime.ElementAt(i).Key == "Change Scene")
             {
                 Source.Pause();
-                yield return new WaitForSeconds(2);
-                FadeIn.SetActive(true);
-                yield return new WaitForSeconds(1.5f);
-                CutSceneSpriteRenderer.sprite = NextCutSceneSprite;
-                FadeOut.SetActive(false);
-                FadeOut.SetActive(true);
-                yield return new WaitForSeconds(0.1f);
-                FadeIn.SetActive(false);
+                //FadeIn.SetActive(true);
+                LastCutScene.SetActive(true);
                 yield return new WaitForSeconds(1);
+                Text.text = "";
+                LastCutScene.SetActive(false);
+                CutSceneSpriteRenderer.sprite = NextCutSceneSprite;
+                //FadeOut.SetActive(false);
+                //FadeOut.SetActive(true);
+                //FadeIn.SetActive(false);
+                yield return new WaitForSeconds(0.2f);
                 Source.UnPause();
                 continue;
             }
@@ -131,8 +133,7 @@ public class CutSceneText : MonoBehaviour
 
         if (SceneManager.GetActiveScene().name != "SlutCutScene")
         {
-            LastCutScene.SetActive(true);
-            yield return new WaitForSeconds(1);
+            
             SceneManager.LoadScene("Main");
         }
         else

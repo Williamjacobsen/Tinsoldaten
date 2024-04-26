@@ -158,7 +158,8 @@ public class PlayerMovement : MonoBehaviour
             if (PlayerStats.health <= 0)
             {
                 Debug.Log("Dead");
-                SceneManager.LoadScene("Main Menu");
+                
+                SceneManager.LoadScene("Dead");
             }
             else if (PlayerStats.health < 1)
             {
